@@ -1,0 +1,115 @@
+Iot Workshop
+
+Internet of Things 
+
+
+
+AVR - Advanced Virtual RISC
+
+Released in 1996
+
+Harward and Von Huemann(Google Search)
+
+
+Risc(Reduced Instruction Set Computing) and Cisc(Complex Instruction Set Computing)
+
+
+Embedded C
+
+
+AVR ATMEGA 8
+
+works on 5 freq 1,4,8,12,16 MHz freq.
+
+and 8kb flash memory
+and can execute 1 MIPS per MHz
+
+
+32 X 8 General Purpose Working registers
+6 ADC Channels
+Internal Calibrated Oscillator
+
+
+Total 28 Pins
+
+Input and Output
+
+Port B - 8 
+Port C - 7
+Port D - 8
+
+
+For ADC AVCC(20) and GND(22)
+
+for MC (7 and 8)
+
+
+Each Port contains
+
+DDRx - Data Direction Register
+PINx - Port Input
+PORTx - Port Output
+
+
+to make any pin input 0 and for output 1
+
+
+
+DDRB = 0b00001111; // Binary
+DDRB = 0x0f;		//HexaDecimal
+DDRB = 15;			//Decimal
+DDRB = 015;			//Octal
+
+
+
+L293D
+
+L - Lithium Ion
+2 - 2 H bridge
+9 - Standard Voltage
+3 - 3 Diodes
+D - Diodes
+
+
+
+UART
+
+
+Universal Asynchorous Reciever and Transmitter
+
+bit rate: no of bits transferred per sec
+
+baud rate : no of times signal is changing per sec
+
+
+
+USART Initializing
+
+
+void usart_init()
+{
+	UBRRL = 25;
+	UCSRB|=(1<<TXEN)|(1<<RXEN);
+	UCSRC|=(1<<URSEL)|(1<<USBS)|(1<<UCSZ1)|(1<<UCSZ0);.
+}
+
+USART Transmission
+
+void usart_transmit(unsigned int data)
+{
+	while(!(UCSRA & (1<<UDRE))){
+		UDR = data;
+	}
+}
+
+USRAT Reciever
+
+unsigned int usart_recieve(void){
+	while((UCSRA & (1<<RXC))==0);
+	return UDR;
+}
+
+
+
+USART technical
+ESPN22661 Model
